@@ -3,6 +3,15 @@ import joblib
 import numpy as np
 import os
 
+URLS = {
+    "archivo1.pkl": "https://drive.google.com/uc?export=download&id=1Qu55sPYYveUGBcinzxgk3HTu7QEtXQl0",
+    "modelo_titanic.pkl": "https://drive.google.com/uc?export=download&id=1jA2Bp_A0u-sv4hV4Rv34fu-Cd5ov8aLU",
+    "titanic_rf_model.joblib": "https://drive.google.com/uc?export=download&id=1Qazikb3X9F1f5bCNOsDXAUUipgzbQKjm",
+    "gender_submission.csv": "https://drive.google.com/uc?export=download&id=1D3MMkxYva40kdhQYvt9hmhEL39hduNH3",
+    "test.csv": "https://drive.google.com/uc?export=download&id=1zDYntEh9QMMxeVUaKJyYpBkgyintWJIz",
+    "train.csv": "https://drive.google.com/uc?export=download&id=1uR4Il5pQ8LwGgUXhv9a3u8az5fmvE8AD",
+}
+
 # Crear app Flask indicando dónde están templates y static
 app = Flask(__name__, static_folder='static', template_folder='templates')
 
