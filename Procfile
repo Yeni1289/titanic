@@ -1,2 +1,2 @@
-web: gunicorn titanic.wsgi:application --timeout 120
+gunicorn app:app
 
