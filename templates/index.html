@@ -1,0 +1,93 @@
+<!doctype html> 
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Predicción Titanic</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: Arial, sans-serif; background: linear-gradient(#0f2027,#2c5364); color: #fff; padding: 20px; }
+    .container { max-width: 900px; margin: 0 auto; background: rgba(255,255,255,0.04); padding: 20px; border-radius: 12px; }
+    h1 { text-align:center; }
+    .flex { display:flex; gap:20px; flex-wrap:wrap; }
+    form { flex:1; min-width:320px; }
+    label { display:block; margin-top:8px; font-size:14px; }
+    input, select { width:100%; padding:8px; border-radius:6px; border:none; margin-top:6px; }
+    button { margin-top:12px; padding:10px 18px; border-radius:8px; border:none; background:#ff6b6b; color:#fff; font-weight:bold; }
+    img { width:100%; max-width:400px; border-radius:8px; display:block; margin:0 auto 12px; }
+    .resultado { margin-top:12px; font-size:18px; font-weight:bold; text-align:center; }
+    .error { color:#ffb3b3; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1> ¿Te hubieras salvado en el Titanic?</h1>
+    <div class="flex">
+      <form action="/predecir" method="post">
+        <img src="{{ url_for('static', filename='titanic.jpeg') }}" alt="Titanic">
+        <label>Clase de billete 
+          <select name="pclass" required>
+            <option value="" selected disabled>Selecciona tu clase de billete</option>
+            <option value="1">Primera clase</option>
+            <option value="2">Segunda clase</option>
+            <option value="3">Tercera clase</option>
+          </select>
+        </label>
+
+        <label>Sexo
+          <select name="sexo">
+            <option value="" selected disabled>Selecciona tu sexo</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+          </select>
+        </label>
+
+        <label>Edad (en numero)
+          <input type="number" name="edad" step="0.1" value="00" required>
+        </label>
+
+        <label>Hermanos o cónyuges a bordo
+          <input type="number" name="sibsp" value="0" required>
+        </label>
+
+        <label>Padres o  hijos a bordo
+          <input type="number" name="parch" value="0" required>
+        </label>
+
+        <label>Boleto (identificador del billete)
+          <input type="text" name="boleto" placeholder="Ej: A/5 21171">
+        </label>
+
+        <label>Tarifa  pagada (£)
+          <input type="number" name="tarifa" step="0.01" value="0.00" required>
+        </label>
+
+        <label>Cabina 
+          <input type="text" name="cabina" placeholder="Ej: C85">
+        </label>
+
+        <label>Embarcado (puerto)
+          <select name="embarcado">
+            <option value="" selected disabled>Selecciona tu lugar de embarcado</option>
+            <option value="S">Southampton (S)</option>
+            <option value="C">Cherburgo (C)</option>
+            <option value="Q">Queenstown (Q)</option>
+          </select>
+        </label>
+
+        <button type="submit">Predecir si me hubiera salvado</button>
+
+        {% if error %}
+          <div class="resultado error">{{ error }}</div>
+        {% endif %}
+
+        {% if resultado %}
+          <div class="resultado">{{ resultado }}</div>
+          <div style="text-align:center; margin-top:8px;">Confianza del modelo: {{ confianza or 'N/A' }}</div>
+          <div style="text-align:center; font-size:14px; color:#ddd;">{{ explicacion or '' }}</div>
+        {% endif %}
+      </form>
+    </div>
+  </div>
+</body>
+</html>
+
