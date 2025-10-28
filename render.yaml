@@ -1,2 +1,12 @@
-environment:
-  python_version: 3.12
+services:
+  - type: web
+    name: titanic
+    env: python
+    region: oregon
+    plan: free
+    branch: main
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn titanic.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12
